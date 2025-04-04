@@ -24,3 +24,24 @@
   background-color: black;
   color: white;
 }
+
+[data-dark-mode="true"] {
+  background-color: black;
+  color: white;
+}
+
+[data-dark-mode="true"].Control,
+[data-dark-mode="true"].Result {
+  background-color: yellow;
+  color: blue;
+}
+
+[data-dark-mode="true"].Control button {
+  background-color: white;
+  color: black;
+}
+
+[data-dark-mode="false"] {
+  background-color: white;
+  color: black;
+}
