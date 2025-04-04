@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const MAX_GUESTS_PER_STAFF = 2;
 const MAX_STAFFS_PER_MANAGER = 2;
 
@@ -7,6 +7,10 @@ function App() {
   const [guestCount, setGuestCount] = useState(0);
   const [managerCount, setManagerCount] = useState(1);
   const [staffCount, setStaffCount] = useState(1);
+
+  const [isMoreStaffNeeded, setIsMoreStaffNeeded] = useState(false);
+  const [isMoreManagerNeeded, setIsMoreManagerNeeded] = useState(false);
+  const [isMarketOpen, setIsMarketOpen] = useState(true);
 
   const incrementManagerCount = () => {
     setManagerCount(managerCount + 1);
@@ -32,17 +36,31 @@ function App() {
     setGuestCount(guestCount - 1);
   };
 
-  if (guestCount > staffCount * MAX_GUESTS_PER_STAFF) {
-    console.log("More staff needed");
-  } else {
-    console.log("No need for more staff");
-  }
+  useEffect(() => {
+    // Check if we need more staff
+    if (guestCount > staffCount * MAX_GUESTS_PER_STAFF) {
+      setIsMoreStaffNeeded(true);
+    } else {
+      setIsMoreStaffNeeded(false);
+    }
+  }, [guestCount, staffCount]);
 
-  if (staffCount > managerCount * MAX_STAFFS_PER_MANAGER) {
-    console.log("More manager needed");
-  } else {
-    console.log("No need for more manager");
-  }
+  useEffect(() => {
+    if (staffCount > managerCount * MAX_STAFFS_PER_MANAGER) {
+      setIsMoreManagerNeeded(true);
+    } else {
+      setIsMoreManagerNeeded(false);
+    }
+  }, [staffCount, managerCount]);
+
+  useEffect(() => {
+    if (isMoreStaffNeeded || isMoreManagerNeeded) {
+      setIsMarketOpen(false);
+    } else {
+      setIsMarketOpen(true);
+    }
+  }, [isMoreManagerNeeded, isMoreStaffNeeded]);
+
   return (
     <div className="App">
       <div className="ControlContainer">
@@ -76,10 +94,11 @@ function App() {
       </div>
       <div className="Result">
         <h2>
-          Market Status: <span>{"OPEN"}</span>
+          {/* You can use ternary operator to dynamically render div content */}
+          Market Status: <span>{isMarketOpen ? "OPEN" : "CLOSED"}</span>
         </h2>
-        <h4>{""}</h4>
-        <h4>{""}</h4>
+        <h4>{isMoreStaffNeeded ? "Not enough staff" : ""}</h4>
+        <h4>{isMoreManagerNeeded ? "Not enough managers" : ""}</h4>
       </div>
     </div>
   );
