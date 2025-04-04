@@ -11,6 +11,13 @@
   margin-right: 30px;
 }
 
+.ControlContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .Result {
   margin-left: 30px;
   padding: 15px 30px;

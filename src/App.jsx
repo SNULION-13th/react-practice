@@ -6,12 +6,32 @@ const MAX_STAFFS_PER_MANAGER = 2;
 function App() {
   return (
     <div className="App">
-      <div className="Control">
-        <div>
-          <h2>Managers: {1}</h2>
+      <div className="ControlContainer">
+        <div className="Control">
           <div>
-            <button>Increment</button>
-            <button>Decrement</button>
+            <h2>Managers: {1}</h2>
+            <div>
+              <button>Increment</button>
+              <button>Decrement</button>
+            </div>
+          </div>
+        </div>
+        <div className="Control">
+          <div>
+            <h2>Staffs: {1}</h2>
+            <div>
+              <button>Increment</button>
+              <button>Decrement</button>
+            </div>
+          </div>
+        </div>
+        <div className="Control">
+          <div>
+            <h2>Guests: {1}</h2>
+            <div>
+              <button>Increment</button>
+              <button>Decrement</button>
+            </div>
           </div>
         </div>
       </div>
